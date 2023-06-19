@@ -18,9 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "NODE_OPTIONS='-r tsconfig-paths/register' typeorm-ts-node-commonjs --dataSource ./src/database/data-source.ts",
-    "typeorm:migration:generate": "NODE_OPTIONS='-r tsconfig-paths/register' typeorm-ts-node-commonjs migration:generate --dataSource ./src/database/data-source.ts",
-    "typeorm:migration:create": "NODE_OPTIONS='-r tsconfig-paths/register' typeorm-ts-node-commonjs migration:create"
+    "typeorm": "node -r tsconfig-paths/register node_modules/typeorm/cli-ts-node-commonjs.js --dataSource ./src/database/data-source.ts",
+    "typeorm:migration:generate": "node -r tsconfig-paths/register node_modules/typeorm/cli-ts-node-commonjs.js migration:generate --dataSource ./src/database/data-source.ts",
+    "typeorm:migration:create": "node -r tsconfig-paths/register node_modules/typeorm/cli-ts-node-commonjs.js migration:create"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -47,6 +47,7 @@
     "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
+    "cross-env": "^7.0.3",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -86,6 +87,6 @@
       "@database/(.*)": [
         "<rootDir>/database/$1"
       ]
-    }    
+    }
   }
 }

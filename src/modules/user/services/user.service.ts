@@ -1,8 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../repositories/user.repository';
+import { Inject, Injectable } from '@nestjs/common';
+import { UserRepository } from '@database/repositories/user.repository-impl';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository) {}
-  getList() {}
+  constructor(@Inject(UserRepository) private userRepository: UserRepository) {
+    console.log(this.userRepository);
+  }
+  search() {
+    return this.userRepository.search();
+  }
 }

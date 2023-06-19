@@ -1,4 +1,7 @@
-import { User } from '@modules/user/entities/user.entity';
+import { User } from '@modules/user/entities/user-entity';
 import { Repository } from 'typeorm';
 
-export interface UserRepository extends Repository<User> {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface UserRepository extends Repository<User> {
+  search();
+}

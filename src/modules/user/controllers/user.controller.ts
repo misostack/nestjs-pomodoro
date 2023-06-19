@@ -7,6 +7,6 @@ export class UserController {
 
   @Get('/')
   getListUser() {
-    return this.userService.find();
+    return this.userService.search();
   }
 }

@@ -19,7 +19,7 @@ export class DatabaseModule {
       }),
     );
   }
-  static forFeature(entities): DynamicModule {
+  static forFeature(entities = []): DynamicModule {
     const providers: Provider[] = [];
     console.error('providers', providers, REPOSITORIES, entities);
     for (const repository of REPOSITORIES) {
@@ -28,7 +28,6 @@ export class DatabaseModule {
         repository,
       );
 
-      console.error(repository, entity, entity === entities[0]);
       if (!entity) {
         continue;
       }
@@ -36,19 +35,19 @@ export class DatabaseModule {
         inject: [getDataSourceToken()],
         provide: repository,
         useFactory: (dataSource: DataSource) => {
-          const baseRepository = dataSource.getRepository<any>(entity);
+          const baseRepository = dataSource.getRepository(entity);
+
           return new repository(
-            baseRepository.target,
+            baseRepository.target as any,
             baseRepository.manager,
             baseRepository.queryRunner,
           );
         },
       });
-      console.error(providers);
     }
     return {
       module: DatabaseModule,
-      imports: [TypeOrmModule.forFeature(ENTITIES)],
+      imports: [],
       providers: providers,
       exports: providers,
     };
